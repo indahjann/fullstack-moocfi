@@ -1,2 +1,2 @@
-# belajar-backend
-Ini reponya Indah buat belajar backend pake node js, bismillah serius pokonya mah
+# FULL STACK COURSE DI MOOCFI
+Ini reponya Indah buat belajar Web

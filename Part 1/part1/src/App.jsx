@@ -1,11 +1,9 @@
-const App = () => {
-  const friends = [ 'Peter', 'Maya']
-
+const App = (props) => {
+  const {counter} = props
   return (
-    <div>
-      <p>{friends}</p>
-    </div>
+    <div>{counter}</div>
   )
 }
+
 
 export default App

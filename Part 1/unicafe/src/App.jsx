@@ -49,7 +49,7 @@ const App = () => {
       <p>bad {bad}</p>
       <p>all {total}</p>
       <p>average {average}</p>
-      
+      <h1>hallo</h1>
     </div>
   )
 }

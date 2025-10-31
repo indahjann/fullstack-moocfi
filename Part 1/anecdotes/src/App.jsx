@@ -6,6 +6,23 @@ const Button = ({onClick, text}) => {
   )
 }
 
+const Header = ({text}) => {
+  return(
+    <h1>{text}</h1>
+  )
+}
+
+const Content = ({text}) => {
+  return (
+    <div>{text}</div>
+  )
+}
+
+const Votes = ({value}) => {
+  return(
+    <p>has {value} votes</p>
+  )
+}
 
 const App = () => {
   const anecdotes = [
@@ -23,7 +40,10 @@ const App = () => {
   const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
 
   const max = anecdotes.length
-  console.log (max)
+  //console.log (max)
+
+  const maxVote = Math.max(...votes)
+  const maxVoteIndex = votes.indexOf(maxVote)
 
   const handleNextClick = () => {
     const newSelected = Math.floor(Math.random() * max)
@@ -39,12 +59,25 @@ const App = () => {
   }
 
   return (
-    <div>
-      {anecdotes[selected]}<br />
-      <p>has {votes[selected]} votes</p><br />
-      <Button onClick={handleVoteClick} text={"vote"}/>
-      <Button onClick={handleNextClick} text={"new anecdote"}/>
-    </div>
+    <>
+      <Header text={'Anecdotes of the day'} />
+      <div>
+        <Content text={anecdotes[selected]}/>
+        <Votes value={votes[selected]} />
+        <Button onClick={handleVoteClick} text={"vote"}/>
+        <Button onClick={handleNextClick} text={"new anecdote"}/>
+      </div>
+      
+      <Header text={'Anecdotes with most votes'} />
+      {maxVote === 0 ? (
+        <p>No votes yet</p>
+      ) : (
+        <div>
+          <Content text={anecdotes[maxVoteIndex]}/>
+          <Votes value={maxVote} />
+        </div>
+      )}
+    </>
   )
 }
 

@@ -5,6 +5,8 @@ const Button = ({onClick, text}) => {
     <button onClick={onClick}>{text}</button>
   )
 }
+
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -18,6 +20,8 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
+
   const max = anecdotes.length
   console.log (max)
 
@@ -27,10 +31,18 @@ const App = () => {
     console.log("idx: ", newSelected, "text: ", anecdotes[newSelected])
   }
 
+  const handleVoteClick = () => {
+    const copy = [...votes]
+    copy[selected] += 1
+    setVotes(copy)
+    console.log("idx: ", selected, "votes: ", copy[selected])
+  }
+
   return (
     <div>
-      {anecdotes[selected]}
-      <br />
+      {anecdotes[selected]}<br />
+      <p>has {votes[selected]} votes</p><br />
+      <Button onClick={handleVoteClick} text={"vote"}/>
       <Button onClick={handleNextClick} text={"new anecdote"}/>
     </div>
   )

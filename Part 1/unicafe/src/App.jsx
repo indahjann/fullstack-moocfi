@@ -14,9 +14,19 @@ const Button = ({onClick, text}) => {
   )
 }
 
-const Content = ({text, value}) => {
-  return(
-    <p>{text} {value} </p>
+const Statistics = (props) => {
+  const average = props.total === 0 ? 0 : (props.good - props.bad)/props.total
+  const positive = props.total === 0 ? '0 %' : (props.good/props.total)*100 + '%'
+
+  return (
+    <div>
+      good {props.good} <br />
+      neutral {props.neutral} <br />
+      bad {props.bad} <br />
+      all {props.total} <br />
+      average {average} <br />
+      positive {positive} <br />
+    </div>
   )
 }
 
@@ -48,17 +58,6 @@ const App = () => {
     setTotal(good + neutral + updateBad)
   }
 
-  const average = () => {
-    if (total === 0) return 0
-    return ((good - bad)/total)
-  }
-
-  const positive = () => {
-    if (total === 0) return 0
-    return ((good / total) * 100) + ' %'
-  }
-
-
   return (
     <div>
       <Header title={'give feedback'}/>
@@ -68,14 +67,12 @@ const App = () => {
         <Button onClick={() => handleBadClicks()} text={'bad'} />
       </div>
       <Header title={'statistic'}/>
-      <div>
-        <Content text={'good'} value={good} />
-        <Content text={'neutral'} value={neutral} />
-        <Content text={'bad'} value={bad} />
-        <Content text={'all'} value={total} />
-        <Content text={'average'} value={average()} />
-        <Content text={'positive'} value={positive()} />
-      </div>
+      
+      <Statistics good={good}
+                  neutral={neutral}
+                  bad={bad}
+                  total={total}/>
+
     </div>
 
   )

@@ -24,11 +24,27 @@ const Content = ({ parts }) => {
     )
 }
 
+const Total = ({ parts }) => {
+    const total = parts.reduce((sum, part) => {
+        console.log('what is happening', sum, part)
+        return sum + part.exercises
+    }, 0)
+    
+    console.log('final total:', total)
+    
+    return(
+        <div>
+            <b>total of {total} exercises</b>
+        </div>
+    )
+}
+
 const Course = ({ course }) => {
     return(
         <div>
             <Header course={course} />
             <Content parts={course.parts}/>
+            <Total parts={course.parts}/>
         </div>
     )
 }

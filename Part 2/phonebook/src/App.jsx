@@ -18,6 +18,19 @@ const App = () => {
         setPersons(initialPerson)
       })
     }, [])
+  
+  const deletePerson = (id) => {
+    const person = persons.find(p => p.id === id)
+    console.log('delete', person)
+
+    if (window.confirm(`Delete ${person.name} ?`)) {
+      personService
+        .remove(id)
+        .then(() => {
+          setPersons(persons.filter(p => p.id !== id))
+        })
+    }
+  }
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -78,7 +91,7 @@ const App = () => {
       />
 
       <h2>Numbers</h2>
-      <Persons personToShow={personToShow} />
+      <Persons personToShow={personToShow} deletePerson={deletePerson} />
     </div>
   )
 }

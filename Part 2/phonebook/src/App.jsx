@@ -61,8 +61,7 @@ const App = () => {
 
     const personObject = {
       name: newName,
-      number: newNumber,
-      id: String(persons.length + 1)
+      number: newNumber
     }
 
     personService

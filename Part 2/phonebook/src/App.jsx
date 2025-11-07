@@ -35,9 +35,14 @@ const App = () => {
     console.log('delete', person)
 
     if (window.confirm(`Delete ${person.name} ?`)) {
-      personService
+      personService      
         .remove(id)
         .then(() => {
+          setPersons(persons.filter(p => p.id !== id))
+        })
+        .catch(error => {
+          console.log("error deleting person")
+          showNotification(`Information of ${person.name} has already been removed from server`, 'error')
           setPersons(persons.filter(p => p.id !== id))
         })
     }
